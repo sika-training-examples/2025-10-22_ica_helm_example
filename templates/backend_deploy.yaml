@@ -23,7 +23,7 @@ spec:
           command:
             - "/bin/sh"
             - "-c"
-            - "sleep 2 && kubectl wait --for=condition=complete --timeout=600s job/backend-migration"
+            - "sleep 2 && kubectl wait --for=condition=complete --timeout=600s job/backend-migration-{{ .Release.Revision }}"
       containers:
         - name: main
           image: {{ .Values.backendImage }}

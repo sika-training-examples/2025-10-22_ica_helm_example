@@ -31,7 +31,7 @@ spec:
     - from:
       - podSelector:
           matchLabels:
-            job-name: backend-migration
+            job-name: backend-migration-{{ .Release.Revision }}
       ports:
         - protocol: TCP
           port: 6379
