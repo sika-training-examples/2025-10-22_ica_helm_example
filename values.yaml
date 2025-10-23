@@ -1,6 +1,8 @@
 # === Required ===
 host:
 
+TERGUM_AZURE_BLOB_ACCOUNT_KEY:
+
 # === Optional ===
 ingressClassName: openshift-default
 
