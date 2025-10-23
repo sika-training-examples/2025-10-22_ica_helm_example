@@ -6,7 +6,7 @@ metadata:
     project: counter
 spec:
   revisionHistoryLimit: 0
-  replicas: 2
+  replicas: {{ .Values.frontendReplica }}
   selector:
     matchLabels:
       app: counter-frontend
@@ -42,16 +42,18 @@ spec:
               mountPath: /tmp/health
       containers:
         - name: main
-          image: ghcr.io/ondrejsika/counter-frontend-go
+          image: {{ .Values.frontendImage }}
           ports:
             - containerPort: 3000
           env:
             - name: API_ORIGIN
               value: http://counter-backend
             - name: FONT_COLOR
-              value: blue
+              value: {{ .Values.frontend_FONT_COLOR | quote }}
+            - name: BACKGROUND_COLOR
+              value: {{ .Values.frontend_BACKGROUND_COLOR | quote }}
             - name: FAIL_ON_ERROR
-              value: '1'
+              value: {{ .Values.frontend_FAIL_ON_ERROR | quote }}
           startupProbe:
             periodSeconds: 1
             failureThreshold: 60

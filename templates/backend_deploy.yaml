@@ -6,7 +6,7 @@ metadata:
     project: counter
 spec:
   revisionHistoryLimit: 0
-  replicas: 2
+  replicas: {{ .Values.backendReplicas }}
   selector:
     matchLabels:
       app: counter-backend
@@ -26,16 +26,16 @@ spec:
             - "sleep 2 && kubectl wait --for=condition=complete --timeout=600s job/backend-migration"
       containers:
         - name: main
-          image: ghcr.io/ondrejsika/counter
+          image: {{ .Values.backendImage }}
           ports:
             - containerPort: 8000
           env:
             - name: REDIS
               value: redis
             - name: SLOW_START
-              value: '10'
+              value: {{ .Values.backend_SLOW_START | quote }}
             - name: EXTRA_TEXT
-              value: v4
+              value: {{ .Values.backend_EXTRA_TEXT | quote }}
           startupProbe:
             periodSeconds: 1
             failureThreshold: 60

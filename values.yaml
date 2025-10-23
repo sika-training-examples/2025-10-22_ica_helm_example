@@ -3,3 +3,18 @@ host:
 
 # === Optional ===
 ingressClassName: openshift-default
+
+## backend
+backendReplicas: 2
+backendImage: ghcr.io/ondrejsika/counter
+
+backend_SLOW_START: 0
+backend_EXTRA_TEXT: ''
+
+## frontend
+frontendReplicas: 2
+frontendImage: ghcr.io/ondrejsika/counter-frontend-go
+
+frontend_FONT_COLOR: ''
+frontend_BACKGROUND_COLOR: ''
+frontend_FAIL_ON_ERROR: '0'
