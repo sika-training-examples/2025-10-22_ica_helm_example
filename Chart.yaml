@@ -1,0 +1,5 @@
+apiVersion: v2
+name: ica-example
+description: An Example App for ICA Training
+type: application
+version: 0.0.0
